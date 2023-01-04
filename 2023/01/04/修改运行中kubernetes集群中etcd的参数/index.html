@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>修改运行中kubernetes集群中etcd的参数 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在一些场景下，您的kubernetes集群已经搭建完成了，但是还需要修改一些核心组件的参数，如etcd、kube-apiserver、kube-scheduler、kube-controller-manager等。 通过kubectl get pod -owide -n kube-system 可以查看到这些核心容器。 123456NAME">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改运行中kubernetes集群中etcd的参数">
+<meta property="og:url" content="https://shoothzj.github.io/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在一些场景下，您的kubernetes集群已经搭建完成了，但是还需要修改一些核心组件的参数，如etcd、kube-apiserver、kube-scheduler、kube-controller-manager等。 通过kubectl get pod -owide -n kube-system 可以查看到这些核心容器。 123456NAME">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-04T19:32:24.000Z">
+<meta property="article:modified_time" content="2023-01-04T12:41:46.003Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shoothzj.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-修改运行中kubernetes集群中etcd的参数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2023-01-04T19:32:24.000Z" itemprop="datePublished">2023-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      修改运行中kubernetes集群中etcd的参数
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在一些场景下，您的kubernetes集群已经搭建完成了，但是还需要修改一些核心组件的参数，如etcd、kube-apiserver、kube-scheduler、kube-controller-manager等。</p>
+<p>通过<code>kubectl get pod -owide -n kube-system</code> 可以查看到这些核心容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NAME                               READY   STATUS    RESTARTS       AGE</span><br><span class="line">coredns-78fcd69978-rdmjm           1/1     Running   11 (23s ago)   281d</span><br><span class="line">etcd-<span class="variable">$NODE1</span>                        1/1     Running   13 (23s ago)   281d</span><br><span class="line">etcd-<span class="variable">$NODE2</span>                        1/1     Running   13 (23s ago)   281d</span><br><span class="line">etcd-<span class="variable">$NODE3</span>                        1/1     Running   13 (23s ago)   281d</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+
+<p>以etcd为例，etcd的参数就在pod中的commands参数里。可以通过<code>kubectl describe pod etcd-$NODENAME -n kube-system</code>来查看(省略部分参数)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Name: etcd-<span class="variable">$NODENAME</span></span><br><span class="line">Namespace: kube-system</span><br><span class="line">Containers:</span><br><span class="line">etcd:</span><br><span class="line">Command:</span><br><span class="line">--client-cert-auth=<span class="literal">true</span></span><br><span class="line">--trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt</span><br></pre></td></tr></table></figure>
+
+<p>然而，如果您尝试编辑pod中的参数，会发现它们是不可修改的。</p>
+<p>不过，如果您需要修改参数，还有另一个办法，通过修改**&#x2F;etc&#x2F;kubernetes&#x2F;manifests&#x2F;**下的yaml文件来修改运行中kubernetes集群中”系统”Pod的参数。原理是，当您把yaml文件修改后，kubelet会自动监听yaml文件的变更，并重新拉起本机器上的pod。</p>
+<p>举个例子，如果您希望关闭etcd集群对客户端的认证，那么您可以修改**&#x2F;etc&#x2F;kubernetes&#x2F;mainfiest&#x2F;etcd.yaml**,将<strong>client-cert-auth</strong>设置为false，把**–trusted-ca-file**去掉。注意：三台master机器节点都需要执行此操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shoothzj.github.io/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/" data-id="clchnfhvx0001dap7hy8p82wh" data-title="修改运行中kubernetes集群中etcd的参数" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/01/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/">修改运行中kubernetes集群中etcd的参数</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/04/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
