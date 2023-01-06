@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>kubernetes容器获取IP地址 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://shoothzj.github.io/index.html">
+  <meta name="description" content="kubernetes中容器获取IP地址是一个常见的需求，常见的有两种获取IP地址的方式 kubernetes环境变量注入通过在部署时，container下的env中配置如下yaml 12345- name: POD_IP  valueFrom:    fieldRef:      apiVersion: v1      fieldPath: status.podIP  进入容器就可以根据环境变量获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes容器获取IP地址">
+<meta property="og:url" content="https://shoothzj.github.io/2023/01/06/kubernetes%E5%AE%B9%E5%99%A8%E8%8E%B7%E5%8F%96IP%E5%9C%B0%E5%9D%80/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="kubernetes中容器获取IP地址是一个常见的需求，常见的有两种获取IP地址的方式 kubernetes环境变量注入通过在部署时，container下的env中配置如下yaml 12345- name: POD_IP  valueFrom:    fieldRef:      apiVersion: v1      fieldPath: status.podIP  进入容器就可以根据环境变量获">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-06T19:05:07.000Z">
+<meta property="article:modified_time" content="2023-01-06T11:05:56.007Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -69,9 +73,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-kubernetes容器获取IP地址" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-kubernetes容器获取IP地址" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/01/06/kubernetes%E5%AE%B9%E5%99%A8%E8%8E%B7%E5%8F%96IP%E5%9C%B0%E5%9D%80/" class="article-date">
   <time class="dt-published" datetime="2023-01-06T19:05:07.000Z" itemprop="datePublished">2023-01-06</time>
@@ -84,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/01/06/kubernetes%E5%AE%B9%E5%99%A8%E8%8E%B7%E5%8F%96IP%E5%9C%B0%E5%9D%80/">kubernetes容器获取IP地址</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      kubernetes容器获取IP地址
     </h1>
   
 
@@ -122,110 +124,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/01/06/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2023-01-06T11:05:56.003Z" itemprop="datePublished">2023-01-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/01/06/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2023/01/06/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://shoothzj.github.io/2023/01/06/hello-world/" data-id="clckevzb20000c8osbeoea1p8" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-修改运行中kubernetes集群中etcd的参数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/" class="article-date">
-  <time class="dt-published" datetime="2023-01-04T19:32:24.000Z" itemprop="datePublished">2023-01-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/">修改运行中kubernetes集群中etcd的参数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在一些场景下，您的kubernetes集群已经搭建完成了，但是还需要修改一些核心组件的参数，如etcd、kube-apiserver、kube-scheduler、kube-controller-manager等。</p>
-<p>通过<code>kubectl get pod -owide -n kube-system</code> 可以查看到这些核心容器。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NAME                               READY   STATUS    RESTARTS       AGE</span><br><span class="line">coredns-78fcd69978-rdmjm           1/1     Running   11 (23s ago)   281d</span><br><span class="line">etcd-<span class="variable">$NODE1</span>                        1/1     Running   13 (23s ago)   281d</span><br><span class="line">etcd-<span class="variable">$NODE2</span>                        1/1     Running   13 (23s ago)   281d</span><br><span class="line">etcd-<span class="variable">$NODE3</span>                        1/1     Running   13 (23s ago)   281d</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
-
-<p>以etcd为例，etcd的参数就在pod中的commands参数里。可以通过<code>kubectl describe pod etcd-$NODENAME -n kube-system</code>来查看(省略部分参数)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Name: etcd-<span class="variable">$NODENAME</span></span><br><span class="line">Namespace: kube-system</span><br><span class="line">Containers:</span><br><span class="line">etcd:</span><br><span class="line">Command:</span><br><span class="line">--client-cert-auth=<span class="literal">true</span></span><br><span class="line">--trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt</span><br></pre></td></tr></table></figure>
-
-<p>然而，如果您尝试编辑pod中的参数，会发现它们是不可修改的。</p>
-<p>不过，如果您需要修改参数，还有另一个办法，通过修改**&#x2F;etc&#x2F;kubernetes&#x2F;manifests&#x2F;**下的yaml文件来修改运行中kubernetes集群中”系统”Pod的参数。原理是，当您把yaml文件修改后，kubelet会自动监听yaml文件的变更，并重新拉起本机器上的pod。</p>
-<p>举个例子，如果您希望关闭etcd集群对客户端的认证，那么您可以修改**&#x2F;etc&#x2F;kubernetes&#x2F;mainfiest&#x2F;etcd.yaml**,将<strong>client-cert-auth</strong>设置为false，把**–trusted-ca-file**去掉。注意：三台master机器节点都需要执行此操作</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://shoothzj.github.io/2023/01/04/%E4%BF%AE%E6%94%B9%E8%BF%90%E8%A1%8C%E4%B8%ADkubernetes%E9%9B%86%E7%BE%A4%E4%B8%ADetcd%E7%9A%84%E5%8F%82%E6%95%B0/" data-id="clckevzbb0002c8os64tbfmqp" data-title="修改运行中kubernetes集群中etcd的参数" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
